@@ -1,0 +1,58 @@
+{
+  "locked_door": {
+    "name": "Stuck Door", "emoji": "🚪", "rule": "both_same",
+    "text": "The door is jammed! Pick the SAME move as your buddy to shove it open together.",
+    "win_text": "Both of you hit the door at once. CRASH, it flies open!",
+    "fail_text": "One pushed, one pulled. The door laughed at you.",
+    "fail_panic": 12
+  },
+  "chatty_chachi": {
+    "name": "Chatty Chachi Ghost", "emoji": "👻", "rule": "any", "good_moves": ["hold", "help"],
+    "text": "A ghost auntie wants to chat about your whole family tree. Be patient (Hold) or let your buddy rescue you (Help).",
+    "win_text": "You nodded politely and escaped the 40-minute story.",
+    "fail_text": "She started on your cousin's wedding. Panic rises.",
+    "fail_panic": 12
+  },
+  "slipper_bat": {
+    "name": "Slipper Bat", "emoji": "🦇", "rule": "any", "good_moves": ["sprint", "help"],
+    "text": "A flying slipper with wings is coming right at you! Run (Sprint) or cover your buddy (Help).",
+    "win_text": "Dodged! The slipper smacked a painting instead.",
+    "fail_text": "THWACK! Right on the forehead.",
+    "fail_panic": 12
+  },
+  "biryani_blob": {
+    "name": "Biryani Blob", "emoji": "🍛", "rule": "any", "good_moves": ["hold", "sprint"],
+    "text": "A giant blob smells SO good. Resist it (Hold) or run past it (Sprint).",
+    "win_text": "You ignored the smell. Legends only.",
+    "fail_text": "You took one sniff and lost a whole turn drooling.",
+    "fail_panic": 10
+  },
+  "mirror_twin": {
+    "name": "Mirror Twin", "emoji": "🪞", "rule": "different",
+    "text": "A mirror twin copies your move! Choose DIFFERENT moves from your buddy to confuse it.",
+    "win_text": "The twin got confused and walked into itself.",
+    "fail_text": "You did the same thing, so the twin copied you perfectly. Annoying.",
+    "fail_panic": 12
+  },
+  "dancing_uncles": {
+    "name": "Dancing Uncles", "emoji": "🕺", "rule": "any", "good_moves": ["tiptoe", "help"],
+    "text": "Uncles are doing the wedding dance on the only path. Sneak around (Tiptoe) or help each other through (Help).",
+    "win_text": "You slipped between two dancing uncles like a ninja.",
+    "fail_text": "An uncle pulled you into the dance. Five minutes gone.",
+    "fail_panic": 12
+  },
+  "buffet_line": {
+    "name": "Endless Buffet Line", "emoji": "🍽️", "rule": "any", "good_moves": ["sprint", "help"],
+    "text": "The buffet line blocks the hall. Barge through (Sprint) or have your buddy clear a path (Help).",
+    "win_text": "You squeezed past the naan table. Respect.",
+    "fail_text": "You got stuck behind someone taking 14 pieces of chicken.",
+    "fail_panic": 10
+  },
+  "ferris_wheel": {
+    "name": "Stuck Ferris Wheel", "emoji": "🎡", "rule": "both_same",
+    "text": "The ferris wheel must be started together! Pick the SAME move as your buddy.",
+    "win_text": "In sync! The wheel spins and drops you at the top.",
+    "fail_text": "Out of sync, so the wheel jerked and swung you around.",
+    "fail_panic": 12
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "pappu": {
+    "name": "Pappu Panic",
+    "emoji": "🧸",
+    "desc": "Nervous kid in pajamas",
+    "special": {
+      "name": "Tiptoe Ninja",
+      "desc": "Slips past the hurdle and calms down",
+      "step": 2,
+      "panic": -5,
+      "clear_hurdle": true
+    }
+  },
+  "quack": {
+    "name": "Captain Quack",
+    "emoji": "🦆",
+    "desc": "Dramatic duck in a tiny sailor hat",
+    "special": {
+      "name": "Waddle Dash",
+      "desc": "Huge speed, but might go HONK",
+      "step": 4,
+      "panic": 8,
+      "risk": { "chance": 0.35, "panic": 14, "text": "HONK! The whole place woke up." }
+    }
+  },
+  "wobbly": {
+    "name": "Wizard Wobbly",
+    "emoji": "🧙",
+    "desc": "Old wizard with a very bad stomach",
+    "special": {
+      "name": "Cast Clench",
+      "desc": "Magically freezes the panic",
+      "step": 0,
+      "panic": -25
+    }
+  },
+  "mango": {
+    "name": "Mango Mike",
+    "emoji": "🥭",
+    "desc": "Sweaty mango with sunglasses",
+    "special": {
+      "name": "Juice Slide",
+      "desc": "Slides past the hurdle, leaves a slippery mess for your buddy",
+      "step": 2,
+      "panic": 4,
+      "clear_hurdle": true,
+      "stun_partner": true
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "haveli": {
+    "name": "Chacha's Haunted Haveli", "emoji": "🏚️", "length": 10,
+    "hurdles": ["locked_door", "chatty_chachi", "slipper_bat", "mirror_twin", "biryani_blob"]
+  },
+  "shaadi": {
+    "name": "Spooky Shaadi Hall", "emoji": "🎪", "length": 10,
+    "hurdles": ["dancing_uncles", "buffet_line", "chatty_chachi", "locked_door", "mirror_twin"]
+  },
+  "mela": {
+    "name": "Moonlight Mela", "emoji": "🎡", "length": 10,
+    "hurdles": ["ferris_wheel", "slipper_bat", "biryani_blob", "mirror_twin", "dancing_uncles"]
+  }
+}
