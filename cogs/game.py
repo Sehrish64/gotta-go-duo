@@ -138,6 +138,13 @@ def track(progress: int, length: int) -> str:
     return "▫️" * pos + "🧍🧍" + "▫️" * (length - pos) + "🚽"
 
 
+def track_running(progress: int, length: int, duo: str, frame: int) -> str:
+    """Progress bar with the duo visibly mid-run (dash alternates each frame)."""
+    pos = max(0, min(length, progress))
+    dash = "💨" if frame % 2 == 0 else "💨💨"
+    return "▫️" * pos + f"{duo}{dash}" + "▫️" * (length - pos) + "🚽"
+
+
 def turn_embed(game: Game, lines: list[str] | None = None) -> discord.Embed:
     m, h = MAPS[game.map_id], HURDLES[game.hurdle_id]
     e = discord.Embed(
@@ -533,12 +540,40 @@ class GameCog(commands.Cog):
             view.unlock()
             await game.message.edit(embed=turn_embed(game, game.last_lines), view=view)
 
+    async def animate_run(self, game: Game, old: int, new: int, lines: list[str]) -> None:
+        """Frame-by-frame running animation: the duo visibly rushes forward square by square."""
+        if new <= old or game.finished or not game.message:
+            return
+        length = MAPS[game.map_id]["length"]
+        duo = f"{game.players[0].char['emoji']}{game.players[1].char['emoji']}"
+        total = new - old
+        frames = min(total, 4)  # cap edits to respect Discord rate limits
+        positions = [old + round(total * i / frames) for i in range(1, frames + 1)]
+        for idx, pos in enumerate(positions):
+            if game.finished:
+                return
+            e = discord.Embed(
+                title=f"🏃 BHAGO! Turn {game.turn}",
+                colour=discord.Colour.orange(),
+            )
+            if lines:
+                e.add_field(name="📣 Last turn", value="\n".join(lines)[:1024], inline=False)
+            e.add_field(name="😰 Panic meter", value=meter_bar(game.meter), inline=False)
+            e.add_field(name="🗺️ Progress", value=track_running(pos, length, duo, idx), inline=False)
+            e.set_footer(text="Bhago bhago, bathroom qareeb hai! 🏃💨🚽")
+            try:
+                await game.message.edit(embed=e, view=None)
+            except Exception:
+                return
+            await asyncio.sleep(1.0)
+
     async def advance(self, game: Game, token: int) -> None:
         async with game.lock:
             if game.finished or token != game.turn:
                 return  # already handled (double click or timeout race)
             if game.view:
                 game.view.stop()
+            old_progress = game.progress
             lines = resolve_turn(game)
             length = MAPS[game.map_id]["length"]
             if game.idle_turns >= IDLE_LIMIT:
@@ -551,6 +586,8 @@ class GameCog(commands.Cog):
                 await game.message.edit(embed=e, view=None)
             elif game.progress >= length or game.meter >= MAX_PANIC:
                 won = game.progress >= length and game.meter < MAX_PANIC
+                if won:
+                    await self.animate_run(game, old_progress, game.progress, lines)
                 self.remove(game, leave=False)
                 self.spawn(self.save_result(game, won))
                 self.spawn(self.play_sfx(game, "win" if won else "lose", leave=True))
@@ -559,6 +596,7 @@ class GameCog(commands.Cog):
                 sound = next((n for n in SFX_PRIORITY if n in game.sfx), None)
                 if sound:
                     self.spawn(self.play_sfx(game, sound))
+                await self.animate_run(game, old_progress, game.progress, lines)
                 await self.begin_turn(game, lines)
 
     # -- slash command
